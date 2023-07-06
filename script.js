@@ -4,7 +4,7 @@ let doctors = [];
 
 // Función para validar los campos del formulario utilizando expresiones regulares y el DOM
 function validateForm(event) {
-  event.preventDefault(); // Evitar que el formulario se envíe
+  event.preventDefault(); 
 
   // Obtener los valores de los campos del formulario de doctores
   const doctorName = document.getElementById('doctor-name').value;
@@ -22,7 +22,7 @@ function validateForm(event) {
   const patientPhone = document.getElementById('patient-phone').value;
   const patientSpecialty = document.getElementById('patient-specialty').value;
 
-  // Crear objetos para almacenar la información de doctores y pacientes
+ 
   const doctorData = {
     name: doctorName,
     lastname: doctorLastname,
@@ -41,15 +41,13 @@ function validateForm(event) {
     specialty: patientSpecialty
   };
 
-  // Agregar los objetos de doctores y pacientes al array correspondiente
+
   doctors.push(doctorData);
   patients.push(patientData);
 
   // Convertir los arrays a JSON
   const doctorsJSON = JSON.stringify(doctors);
   const patientsJSON = JSON.stringify(patients);
-
-  // Guardar los archivos JSON en el almacenamiento local del navegador
   localStorage.setItem('doctors', doctorsJSON);
   localStorage.setItem('patients', patientsJSON);
 
@@ -61,20 +59,18 @@ function validateForm(event) {
   event.target.reset();
 }
 
-// Función para mostrar la información de los pacientes en la página
+
 function displayPatients() {
   const patientList = document.getElementById('patient-list');
 
-  // Obtener los datos de pacientes desde el almacenamiento local (si existen)
+
   const patientsJSON = localStorage.getItem('patients');
   if (patientsJSON) {
     patients = JSON.parse(patientsJSON);
   }
 
-  // Limpiar el contenido previo de la lista de pacientes
   patientList.innerHTML = '';
 
-  // Recorrer los pacientes y crear elementos de lista para mostrar la información
   patients.forEach(function(patient) {
     const listItem = document.createElement('li');
     listItem.textContent = `Nombre: ${patient.name}, Cédula: ${patient.cedula}, Especialidad: ${patient.specialty}`;
@@ -86,16 +82,13 @@ function displayPatients() {
 function displayDoctors() {
   const doctorList = document.getElementById('doctor-list');
 
-  // Obtener los datos de doctores desde el almacenamiento local (si existen)
   const doctorsJSON = localStorage.getItem('doctors');
   if (doctorsJSON) {
     doctors = JSON.parse(doctorsJSON);
   }
 
-  // Limpiar el contenido previo de la lista de doctores
   doctorList.innerHTML = '';
 
-  // Recorrer los doctores y crear elementos de lista para mostrar la información
   doctors.forEach(function(doctor) {
     const listItem = document.createElement('li');
     listItem.textContent = `Nombre: ${doctor.name}, Cédula: ${doctor.cedula}, Especialidad: ${doctor.specialty}`;
@@ -103,11 +96,9 @@ function displayDoctors() {
   });
 }
 
-// Agregar el evento submit al formulario de doctores
 const doctorForm = document.getElementById('doctor-form');
 doctorForm.addEventListener('submit', validateForm);
 
-// Agregar el evento submit al formulario de pacientes
 const patientForm = document.getElementById('patient-form');
 patientForm.addEventListener('submit', validateForm);
 
